@@ -21,7 +21,7 @@ app.get("/select/:gameId/:xPosition/:yPosition", (req, res) => {
     const isFirstMove = gameLogic.getIsFirstMove(targetGameId);
 
     if (isFirstMove) {
-        // Get a collection of all (1D) indices that contain bombs
+        // Get a collection of all (2D) indices that contain bombs
         gameLogic.generateBombIndices(targetGameId, gameInstance, xPosition, yPosition, null);
     }
 
@@ -32,6 +32,11 @@ app.get("/select/:gameId/:xPosition/:yPosition", (req, res) => {
     const squaresToReveal = gameLogic.getSquaresToRevealForClick(targetGameId, xPosition, yPosition, gameInstance.revealedSquares);
 
     gameInstance.revealedSquares = squaresToReveal;
+
+    // Detect if we won, and send 201 if so
+    if (gameLogic.getDidWinGame(targetGameId)) {
+        return res.status(201).json({ "gameInstance": gameInstance });
+    }
 
     return res.status(200).json({ "gameInstance": gameInstance });
     console.log(gameInstance);

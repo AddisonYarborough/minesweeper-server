@@ -6,10 +6,26 @@ const getIsFirstMove = (gameId) => {
 }
 
 // Generates a unique ID to associate game data with
-const generateGameId = () => {
+const getNewGameId = () => {
     // Use the milliseconds since epoch start as our unique ID
     return Date.now();
 };
+
+const getDidWinGame = (gameId) => {
+    const targetGameData = gameData.getGameInstanceWithId(gameId);
+
+    // Get the number revealed squares
+    const revealedSquareCount = targetGameData.revealedSquares.length;
+
+    // Get the number of bombs for the given game
+    const bombQuantity = targetGameData.bombQuantity;
+
+    // Get the total number of squares on the game board grid
+    const totalSquareCount = targetGameData.width * targetGameData.height;
+
+    // Return whether bomb squares are the only ones left on the board
+    return totalSquareCount - revealedSquareCount === bombQuantity;
+}
 
 // Generates a collection of random indices to place bombs at and saves it to the game data instance
 const generateBombIndices = (gameId, { width, height, bombQuantity }, xPosition, yPosition) => {
@@ -166,10 +182,10 @@ const getIsBombIndex = ({ x, y }, bombIndices) => {
     return isBombIndex;
 }
 
-
 module.exports = {
     getIsFirstMove,
-    generateGameId,
+    getDidWinGame,
+    getNewGameId,
     generateBombIndices,
     getDidClickBomb,
     getSquaresToRevealForClick
