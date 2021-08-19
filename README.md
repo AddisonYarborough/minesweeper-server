@@ -1,7 +1,9 @@
 # minesweeper-server
 
 ## Installation
--  Inistall [node.js](https://nodejs.org/en/) / [express.js](https://expressjs.com/)
+-  Make sure you are pointing at the inner-most minesweeper-server file (there may be one inside the other if you extracted this from a zip file)
+-  If you are having trouble, you can delete the `package-lock.json` file and run `npm i` to re-install packages/dependencies
+-  Install [node.js](https://nodejs.org/en/) / [express.js](https://expressjs.com/)
 -  Pull this repo and `cd` to it via terminal/command prompt
 -  Use `npm run dev` to start the server in development mode
 

@@ -28,7 +28,7 @@ const getDidWinGame = (gameId) => {
 }
 
 // Generates a collection of random indices to place bombs at and saves it to the game data instance
-const generateBombIndices = (gameId, { width, height, bombQuantity }, xPosition, yPosition) => {
+const createNewGame = (gameId, { width, height, bombQuantity }, xPosition, yPosition) => {
     let result = [];
     let clickedPosition = { x: Number(xPosition), y: Number(yPosition) };
 
@@ -186,7 +186,7 @@ module.exports = {
     getIsFirstMove,
     getDidWinGame,
     getNewGameId,
-    generateBombIndices,
+    createNewGame,
     getDidClickBomb,
     getSquaresToRevealForClick
 };
